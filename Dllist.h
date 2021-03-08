@@ -4,18 +4,22 @@
 #include<stdlib.h>
 
 typedef struct node {
-	int key;
+	char* data;
 	node* prev;
 	node* next;
 }node;
 
-node* initialize(int key);
+node* initialize(char* data);
 //Adding new elem
-node* ADD(node* prev, int key);
+node* ADD(node* prev, char* data);
 
 node* DEL(node* current);
 //deleting of the root
 node* DELROOT(node* root);
 
 unsigned int COUNT_ELEMENT(node* head);
+
+void TRAVERSAL_FORWARD(node* head);
+void TRAVERSAL_BACKWARD(node* tail);
+
 

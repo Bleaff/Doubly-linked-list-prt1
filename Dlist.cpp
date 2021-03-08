@@ -2,18 +2,18 @@
 #include "Dllist.h"
 
 typedef struct node {
-	int key;
+	char *data;
 	node* prev;
 	node* next;
 }node;
 
 // initialization of root
- node* initialize(int  key) {
+ node* initialize(char *data) {
 	node* head;
 
 	head = (node*)malloc(sizeof(node));
 
-	head->key = key;
+	head->data = data;
 	head->next = NULL;           
 	head->prev = NULL;
 	
@@ -24,13 +24,13 @@ typedef struct node {
 //Adding new elem
 
 
- node* ADD(node* lst, int number)
+ node* ADD(node* lst, char *number)
 {
 	node* temp, * p;
 	temp = (struct node*)malloc(sizeof(node));
 	p = lst->next; // сохранение указателя на следующий узел
 	lst->next = temp; // предыдущий узел указывает на создаваемый
-	temp->key = number; // сохранение поля данных добавляемого узла
+	temp->data = number; // сохранение поля данных добавляемого узла
 	temp->next = p; // созданный узел указывает на следующий узел
 	temp->prev = lst; // созданный узел указывает на предыдущий узел
 	if (p != NULL)
@@ -80,5 +80,35 @@ unsigned COUNT_ELEMENT( node* head)
 	}
 	return COUNTER;
 }
+
+
+
+void TRAVERSAL_FORWARD(node* head)  
+{
+	node* element = head;
+	if(element != NULL)
+	{
+		while (element->next != NULL)
+		{
+			printf(element->data);
+
+			element = element->next;
+		}
+	}
+}
+void TRAVERSAL_BACKWARD(node* tail)
+{
+	node* element = tail;
+	if (element != NULL)
+	{
+		while (element->prev != NULL)
+		{
+			printf(element->data);
+
+			element = element->prev;
+		}
+	}
+}
+
 
 
