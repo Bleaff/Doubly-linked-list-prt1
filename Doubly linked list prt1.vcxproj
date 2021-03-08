@@ -139,7 +139,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Doubly linked list prt1.cpp" />
+    <ClCompile Include="Dlist.cpp" />
+    <ClCompile Include="main part1.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Dllist.h" />
