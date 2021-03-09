@@ -22,4 +22,9 @@ unsigned int COUNT_ELEMENT(node* head);
 void TRAVERSAL_FORWARD(node* head);
 void TRAVERSAL_BACKWARD(node* tail);
 
+node* FIND(char* elem_data, node* head);
+
+void EXTRACTION(char* del_elem_data);
+
+void REMOVING_DUPLICATE(node* head);
 

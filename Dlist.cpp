@@ -88,7 +88,7 @@ void TRAVERSAL_FORWARD(node* head)
 	node* element = head;
 	if(element != NULL)
 	{
-		while (element->next != NULL)
+		while (element!= NULL)
 		{
 			printf(element->data);
 
@@ -101,7 +101,7 @@ void TRAVERSAL_BACKWARD(node* tail)
 	node* element = tail;
 	if (element != NULL)
 	{
-		while (element->prev != NULL)
+		while (element= NULL)
 		{
 			printf(element->data);
 
@@ -109,6 +109,59 @@ void TRAVERSAL_BACKWARD(node* tail)
 		}
 	}
 }
+
+node* FIND(char* elem_data, node* head)
+{
+	node* element = head;
+	if (element != NULL)
+	{
+		while (element != NULL)
+		{
+			
+			if (element->data == elem_data)
+				return element;
+
+			element = element->next;
+		}
+		return NULL;
+	}
+}
+
+void EXTRACTION(char* del_elem_data,node* head)
+{
+	DEL(FIND(del_elem_data, head));
+
+	printf("Deleted %s completly", del_elem_data);
+}
+
+void REMOVING_DUPLICATE(node* head)
+{
+	node* lhv = head;
+	
+	if (lhv->next != NULL)
+	{
+		node* rhv = lhv->next;
+
+		while (lhv != NULL)
+		{
+
+			while (rhv != NULL)
+			{
+
+				if (lhv->data == rhv->data)//условие схожести элементов
+				{
+					DEL(rhv);
+				}
+				rhv = rhv->next;
+
+			}
+
+			lhv = lhv->next;
+		}
+	}
+
+}
+
 
 
 
