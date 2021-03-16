@@ -1,12 +1,12 @@
 #pragma once
 #include "Dllist.h"
-#include<queue>
 
 typedef struct node {
 	char *data;
 	node* prev;
 	node* next;
 }node;
+
 // initialization of root
  node* initialize(char *data) {
 	node* head;
@@ -20,11 +20,9 @@ typedef struct node {
 
 	return head;
 }
-//Adding new elem
-<<<<<<< HEAD
 
-=======
->>>>>>> 8f78b65e0b864113500aba3285273ec5ea79365c
+//Adding new elem
+
  node* ADD(node* lst, char *number)
 {
 	node* temp, * p;
@@ -52,6 +50,7 @@ node* DEL(node* current) {
 
 	return prev;
 }
+
 //deleting of the root
 node* DELROOT(node* head)
 {
@@ -152,27 +151,14 @@ void REMOVING_DUPLICATE(node* head)
 				rhv = rhv->next;
 
 			}
+
 			lhv = lhv->next;
 		}
 	}
-}
 
-void SWAP(node* lhv, node* rhv)
-{
-	lhv->prev->next = rhv;
-	rhv->next->prev = lhv;
-
-	node* temp = rhv;
-
-	rhv = lhv;
-	rhv->next = lhv;
-
-	lhv = temp;
-	lhv->prev = rhv;
 }
 
 // член
-
 
 
 
