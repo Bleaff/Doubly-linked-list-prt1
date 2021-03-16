@@ -28,3 +28,4 @@ void EXTRACTION(char* del_elem_data);
 
 void REMOVING_DUPLICATE(node* head);
 
+void SWAP(node* lhv, node* rhv);

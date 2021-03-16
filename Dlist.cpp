@@ -162,6 +162,21 @@ void REMOVING_DUPLICATE(node* head)
 
 }
 
+void SWAP(node* lhv, node* rhv)
+{
+	lhv->prev->next = rhv;
+	rhv->next->prev = lhv;
+
+	node* temp = rhv;
+
+	rhv = lhv;
+	rhv->next = lhv;
+
+	lhv = temp;
+	lhv->prev = rhv;
+}
+
+
 // член
 
 
