@@ -23,7 +23,6 @@ typedef struct node {
 
 //Adding new elem
 
-
  node* ADD(node* lst, char *number)
 {
 	node* temp, * p;
@@ -81,8 +80,6 @@ unsigned COUNT_ELEMENT( node* head)
 	return COUNTER;
 }
 
-
-
 void TRAVERSAL_FORWARD(node* head)  
 {
 	node* element = head;
@@ -96,6 +93,7 @@ void TRAVERSAL_FORWARD(node* head)
 		}
 	}
 }
+
 void TRAVERSAL_BACKWARD(node* tail)
 {
 	node* element = tail;
@@ -144,10 +142,8 @@ void REMOVING_DUPLICATE(node* head)
 
 		while (lhv != NULL)
 		{
-
 			while (rhv != NULL)
 			{
-
 				if (lhv->data == rhv->data)//условие схожести элементов
 				{
 					DEL(rhv);
