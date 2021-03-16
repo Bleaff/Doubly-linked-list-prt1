@@ -168,6 +168,8 @@ void SWAP(node* lhv, node* rhv)
 	lhv->prev = rhv;
 }
 
+// член
+
 
 
 
