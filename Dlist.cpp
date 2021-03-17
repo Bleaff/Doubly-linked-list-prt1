@@ -47,6 +47,7 @@ node* DEL(node* current) {
 	if (prev != NULL)prev->next = current->next;
 	if (next != NULL)next->prev = current->prev;
 
+	delete[] current->data;
 	free(current);
 
 	return prev;
@@ -60,6 +61,7 @@ node* DELROOT(node* head)
 	next_after_head = head->next;
 	next_after_head->prev = NULL;
 
+	delete[] head->data;
 	free(head);
 
 	return next_after_head;
@@ -129,9 +131,11 @@ node* FIND(char* elem_data, node* head)
 
 void EXTRACTION(char* del_elem_data,node* head)
 {
-	DEL(FIND(del_elem_data, head));
-
-	printf("Deleted %s completly", del_elem_data);
+	if (FIND(del_elem_data, head)->prev == NULL)DELROOT(head);
+	else {
+		DEL(FIND(del_elem_data, head));
+	}
+		printf("Deleted %s completly", del_elem_data);
 }
 
 void REMOVING_DUPLICATE(node* head)

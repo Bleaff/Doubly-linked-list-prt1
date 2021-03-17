@@ -7,15 +7,13 @@
 // перераспределение памяти с константного буферного массива в динамический адаптирующийся
 char* GETCHARP(char buffer [128])
 {
-	int size_of_buffer = strlen(buffer);
+    unsigned int size_of_buffer = strlen(buffer);
 
-	char* string = (char*)malloc(size_of_buffer * sizeof(char*));
+    char* string = new char[size_of_buffer];
 
-	strcpy(string, buffer);
+    strcpy(string, buffer);
 
-	delete buffer;
-	
-	return string;
+    return string;
 }
 
 int main()
