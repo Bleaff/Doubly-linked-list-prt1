@@ -23,7 +23,6 @@ typedef struct node {
 
 //Adding new elem
 
-
  node* ADD(node* lst, char *number)
 {
 	node* temp, * p;
@@ -82,8 +81,6 @@ unsigned COUNT_ELEMENT( node* head)
 	}
 	return COUNTER;
 }
-
-
 
 void TRAVERSAL_FORWARD(node* head)  
 {
@@ -166,7 +163,7 @@ void REMOVING_DUPLICATE(node* head)
 
 }
 
-void SWAP(node* lhv, node* rhv)
+/*void SWAP(node* lhv, node* rhv)
 {
 	lhv->prev->next = rhv;
 	rhv->next->prev = lhv;
@@ -178,6 +175,57 @@ void SWAP(node* lhv, node* rhv)
 
 	lhv = temp;
 	lhv->prev = rhv;
+}
+*/
+
+void SWAP(node* lhv, node* rhv)
+{
+	char *tmp = lhv->data;
+
+	lhv->data = rhv->data;
+
+	rhv->data = tmp;
+}
+
+   
+node* MIN(node* head)
+{
+
+	node* temp = head;
+
+	node* min = head;
+
+
+	while (temp != NULL)
+	{
+
+		if (min > temp)min = temp;
+
+		temp = temp->next;
+	}
+
+	return min;
+}
+
+node* GETTAIL(node* head)
+{
+	node* temp = head;
+
+	while (temp->next != NULL)
+	{
+		temp = temp->next;
+	}
+	return temp;
+
+}
+
+void SORT(node* n) {
+	node* minNode;
+	while (n->next) {
+		if ((minNode = MIN(n)) != n)
+			SWAP(n, minNode);
+		n = n->next;
+	}
 }
 
 

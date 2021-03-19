@@ -18,6 +18,13 @@ char* GETCHARP(char buffer [128])
 
 int main()
 {
+    node* head;
 
-	return 0;
+    char buffer[128];
+
+    scanf("%s", buffer);
+
+    head = initialize(GETCHARP(buffer));
+	
+    return 0;
 }
