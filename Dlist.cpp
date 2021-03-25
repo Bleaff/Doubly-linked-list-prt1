@@ -219,14 +219,30 @@ node* GETTAIL(node* head)
 
 }
 
-void SORT(node* n) {
-	node* minNode;
-	while (n->next) {
-		if ((minNode = MIN(n)) != n)
-			SWAP(n, minNode);
-		n = n->next;
+void BUBBLE_SORT(node* head) {
+
+	int counter = COUNT_ELEMENT(head);
+
+	if (counter >= 2)
+	{
+		node* tmp = head;
+
+		for (size_t i = 0; i < counter; i++)
+		{
+
+
+			for (size_t i = 0; i < counter - 1; i++)
+			{
+				if (tmp->data > tmp->next->data)
+				{
+					SWAP(FIND(tmp->data, head), FIND(tmp->next->data, head));
+				}
+				tmp = tmp->next;
+			}
+		}
 	}
 }
+
 
 
 // член
