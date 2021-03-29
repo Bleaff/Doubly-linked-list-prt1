@@ -2,6 +2,7 @@
 #include<malloc.h>
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
 
 typedef struct node {
 	char* data;
@@ -30,8 +31,8 @@ void REMOVING_DUPLICATE(node* head);
 
 void SWAP(node* lhv, node* rhv);
 
-char* MIN(node* head);
-
 node* GETTAIL(node* head);
 
-void SORT(node* n);
+void BUBBLE_SORT(node* n);
+
+node* READING_FROM_FILE(node* head,char* file_name);

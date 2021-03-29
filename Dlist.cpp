@@ -186,27 +186,7 @@ void SWAP(node* lhv, node* rhv)
 
 	rhv->data = tmp;
 }
-
-   
-node* MIN(node* head)
-{
-
-	node* temp = head;
-
-	node* min = head;
-
-
-	while (temp != NULL)
-	{
-
-		if (min > temp)min = temp;
-
-		temp = temp->next;
-	}
-
-	return min;
-}
-
+  
 node* GETTAIL(node* head)
 {
 	node* temp = head;
@@ -243,9 +223,57 @@ void BUBBLE_SORT(node* head) {
 	}
 }
 
+node* READING_FROM_FILE(node* head, char* file_name)
+{
+	FILE* file_r;
 
+	int Is_node_already_exist = 1;
 
-// член
+	printf("Is head already exist: 1 - yes, 0 - no \n");
 
+	scanf("%d", Is_node_already_exist);
 
+	char seps[] = " ,";
+	
+	char* token = NULL;
 
+	char buffer[1024];
+
+	node* head_in;
+	
+	node* last;
+
+	if (Is_node_already_exist == 1)
+	{
+		last = GETTAIL(head);
+	}
+
+	file_r = fopen( file_name, "r");
+
+	if (file_r != NULL)
+	{
+		char* splited_str = strtok_s(buffer, seps, &token);
+
+		while (fgets(buffer, 1024, file_r) != NULL)
+		{
+			while (splited_str != NULL)
+			{
+				if (!Is_node_already_exist)
+				{
+					head_in = initialize(splited_str);
+
+					last = head_in;
+				}
+				else {
+					last = ADD(last, splited_str);
+				}
+				if(token != NULL)
+					splited_str = strtok_s(NULL, seps, &token);	
+			}
+		}
+	}
+
+	fclose(file_r);
+
+	return head_in;
+}
