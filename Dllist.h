@@ -36,3 +36,5 @@ node* GETTAIL(node* head);
 void BUBBLE_SORT(node* n);
 
 node* READING_FROM_FILE(node* head,char* file_name);
+
+void WRITING_TO_FILE(node* container, char* file_name);

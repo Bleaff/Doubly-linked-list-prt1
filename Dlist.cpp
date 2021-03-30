@@ -163,6 +163,8 @@ void REMOVING_DUPLICATE(node* head)
 
 }
 
+//swap with pointers and data
+
 /*void SWAP(node* lhv, node* rhv)
 {
 	lhv->prev->next = rhv;
@@ -242,7 +244,7 @@ node* READING_FROM_FILE(node* head, char* file_name)
 	node* head_in;
 	
 	node* last;
-
+	//Система токенов : токен - следующий символ *(вернее указатель на него) , который потом передается в строку 
 	if (Is_node_already_exist == 1)
 	{
 		last = GETTAIL(head);
@@ -252,6 +254,8 @@ node* READING_FROM_FILE(node* head, char* file_name)
 
 	if (file_r != NULL)
 	{
+		printf("File was opened successfully!");
+
 		char* splited_str = strtok_s(buffer, seps, &token);
 
 		while (fgets(buffer, 1024, file_r) != NULL)
@@ -271,9 +275,33 @@ node* READING_FROM_FILE(node* head, char* file_name)
 					splited_str = strtok_s(NULL, seps, &token);	
 			}
 		}
+		fclose(file_r);
 	}
-
-	fclose(file_r);
-
 	return head_in;
+}
+
+void WRITING_TO_FILE(node* container_head, char* file_name) {
+
+	FILE* F1;
+
+	F1 = fopen(file_name, "w");
+
+	node* tmp = container_head;
+
+	if (F1 != NULL)
+	{
+		printf("File was opened successfully!");
+
+		while (tmp != NULL)
+		{
+			fputs(tmp->data, F1);
+
+			tmp = tmp->next;
+		}
+		fclose(F1);
+
+	}
+	else {
+		printf("File wasn't opened correctly!");
+	}
 }
