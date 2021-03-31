@@ -1,5 +1,6 @@
 #pragma once
 #include "Dllist.h"
+#include<string.h>
 
 typedef struct node {
 	char *data;
