@@ -56,9 +56,9 @@ int main()
                 }
                 else if (splited_str == "delete")
                 {
-                    if(token != NULL)
+                    if (token != NULL)
                         splited_str = strtok_s(NULL, seps, &token);
-                    
+
                     if (splited_str == "root")
                         head = DELROOT(head);
 
@@ -74,7 +74,7 @@ int main()
                             }
                         }
                     }
-                    
+
                     else {
                         DEL(FIND(splited_str, head));
 
@@ -82,7 +82,7 @@ int main()
                     }
                     break;
                 }
-              
+
                 else if (splited_str == "count")
                 {
                     printf("The number of the element : %d \n", COUNT_ELEMENT(head));
@@ -117,6 +117,6 @@ int main()
 
     }
 
-	
+
     return 0;
 }
