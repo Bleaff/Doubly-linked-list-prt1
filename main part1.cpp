@@ -10,10 +10,7 @@ int main()
 
     char buffer[128];
 
-    scanf("%s", buffer);
-
-
-    char* token;
+    char* token = NULL;
 
     char seps[] = " ,";
 
@@ -21,17 +18,105 @@ int main()
 
     int number_of_command;
 
-    printf("Enter the amount of command :");
+    printf("Enter the number of command :");
 
     if (scanf("%d", &number_of_command) != NULL)
     {
         for (size_t i = 0; i < number_of_command; i++)
         {
+            scanf("%s", buffer);
 
+            char* splited_str = strtok_s(buffer, seps, &token);
+
+            while (splited_str != NULL)
+            {
+                if (splited_str == "create")
+                {
+                    if (token != NULL)
+                        splited_str = strtok_s(NULL, seps, &token);
+                    head = initialize(splited_str);
+
+                    break;
+                }
+                else if (splited_str == "add")
+                {
+                    if (token != NULL)
+                        splited_str = strtok_s(NULL, seps, &token);
+                    GETTAIL(head)->next = ADD(GETTAIL(head), splited_str);
+
+                    break;
+                }
+                else if (splited_str == "sort")
+                {
+                    BUBBLE_SORT(head);
+
+                    printf("List has been sorted ! \n");
+
+                    break;
+                }
+                else if (splited_str == "delete")
+                {
+                    if (token != NULL)
+                        splited_str = strtok_s(NULL, seps, &token);
+
+                    if (splited_str == "root")
+                        head = DELROOT(head);
+
+                    else if (splited_str == "list")
+                    {
+                        for (size_t i = 0; i < COUNT_ELEMENT(head); i++)
+                        {
+                            if (i == COUNT_ELEMENT(head) - 1)
+                                DELROOT(head);
+
+                            else {
+                                DEL(GETTAIL(head));
+                            }
+                        }
+                    }
+
+                    else {
+                        DEL(FIND(splited_str, head));
+
+                        printf("Deleted completly \n");
+                    }
+                    break;
+                }
+
+                else if (splited_str == "count")
+                {
+                    printf("The number of the element : %d \n", COUNT_ELEMENT(head));
+                }
+                else if (splited_str == "itforward")
+                {
+                    TRAVERSAL_FORWARD(head);
+                }
+                else if (splited_str == "itbackward")
+                {
+                    TRAVERSAL_BACKWARD(head);
+                }
+                else if (splited_str == "remove")
+                {
+                    REMOVING_DUPLICATE(head);
+                }
+                else if (splited_str == "read")
+                {
+                    if (token != NULL)
+                        splited_str = strtok_s(NULL, seps, &token);
+                    READING_FROM_FILE(head, splited_str);
+
+                }
+                else if (splited_str == "write")
+                {
+                    if (token != NULL)
+                        splited_str = strtok_s(NULL, seps, &token);
+                    WRITING_TO_FILE(head, splited_str);
+                }
+            }
         }
 
     }
 
-	
+
     return 0;
 }
