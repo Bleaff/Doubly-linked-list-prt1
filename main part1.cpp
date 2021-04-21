@@ -16,20 +16,20 @@ int main()
 
     char seps[] = " ,";
 
-    printf("HELP: \n 1.Type: 'create data'  where 'data' some string \n 2.Type:'add data' to add new element with parameter data \n 3.Type:'sort' to sort doubly linked list  \n 4.Type: 'delete data' where 'data' is the element with such parameter \n 5.Type 'delete root' to delete root \n6.Type:'count element' to see how many element already exist \n 7.Type:'itforward' or 'itbackward' to print items forward or backward \n 8.Type: 'delete list' to delete all list \n 9.Type:'remove duplicate' to remove duplicate \n 10.Type:'read file_path' to read list from file with name = file_path' \n 11.Type:'write file_name' to write to file with name file_name. \n");
+    printf("HELP: \n 1.Type: '1' data'  where 'data' some string \n 2.Type:'2' data' to add new element with parameter data \n 3.Type:'3' to sort doubly linked list  \n 4.Type: '4 data' where 'data' is the element with such parameter \n 5.Type '5 root' to delete root \n6.Type:'6 element' to see how many element already exist \n 7.Type:'7' or '8' to print items forward or backward \n 8.Type: '9 list' to delete all list \n 9.Type:'10' to remove duplicate \n 10.Type:'11 file_path' to read list from file with name = file_path' \n 11.Type:'12 file_name' to write to file with name file_name. \n 12.Type '0' to STOP. \n");
 
 
 
-    {
+    
         while(buffer != "stop")
         {
-            scanf("%s", buffer);
+           gets_s( buffer);
 
             char* splited_str = strtok_s(buffer, seps, &token);
 
             while (splited_str != NULL)
             {
-                if (splited_str == "create")
+                if (strcmp(splited_str, "create") == 0)
                 {
                     if (token != NULL)
                         splited_str = strtok_s(NULL, seps, &token);
@@ -115,8 +115,6 @@ int main()
                     break;
             }
         }
-
-    }
 
 
     return 0;
