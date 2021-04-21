@@ -1,12 +1,7 @@
-#pragma once
+#pragma warning(disable:4996)
 #include "Dllist.h"
 #include<string.h>
 
-typedef struct node {
-	char *data;
-	node* prev;
-	node* next;
-}node;
 
 // initialization of root
  node* initialize(char *data) {
@@ -14,7 +9,9 @@ typedef struct node {
 
 	head = (node*)malloc(sizeof(node));
 
-	head->data = data;
+	head->data = (char*)malloc(strlen(data) * sizeof(char));
+
+	strcpy(head->data, data);
 	head->next = NULL;           
 	head->prev = NULL;
 	
@@ -28,9 +25,11 @@ typedef struct node {
 {
 	node* temp, * p;
 	temp = (struct node*)malloc(sizeof(node));
+
+	temp->data = (char*)malloc(strlen(number) * sizeof(char));
 	p = lst->next; // сохранение указателя на следующий узел
 	lst->next = temp; // предыдущий узел указывает на создаваемый
-	temp->data = number; // сохранение поля данных добавляемого узла
+	strcpy(temp->data, number);// сохранение поля данных добавляемого узла
 	temp->next = p; // созданный узел указывает на следующий узел
 	temp->prev = lst; // созданный узел указывает на предыдущий узел
 	if (p != NULL)
@@ -234,7 +233,7 @@ node* READING_FROM_FILE(node* head, char* file_name)
 
 	printf("Is head already exist: 1 - yes, 0 - no \n");
 
-	scanf("%d", Is_node_already_exist);
+	scanf("%d", &Is_node_already_exist);
 
 	char seps[] = " ,";
 	
@@ -242,9 +241,9 @@ node* READING_FROM_FILE(node* head, char* file_name)
 
 	char buffer[1024];
 
-	node* head_in;
+	node* head_in = nullptr;
 	
-	node* last;
+	node* last = nullptr;
 	//Система токенов : токен - следующий символ *(вернее указатель на него) , который потом передается в строку 
 	if (Is_node_already_exist == 1)
 	{
