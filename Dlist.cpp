@@ -23,17 +23,14 @@
 
  node* ADD(node* lst, char *number)
 {
-	node* temp, * p;
+	node* temp;
 	temp = (struct node*)malloc(sizeof(node));
 
 	temp->data = (char*)malloc(strlen(number) * sizeof(char));
-	p = lst->next; // сохранение указателя на следующий узел
 	lst->next = temp; // предыдущий узел указывает на создаваемый
 	strcpy(temp->data, number);// сохранение поля данных добавляемого узла
-	temp->next = p; // созданный узел указывает на следующий узел
+	temp->next = NULL; // созданный узел указывает на следующий узел
 	temp->prev = lst; // созданный узел указывает на предыдущий узел
-	if (p != NULL)
-		p->prev = temp;
 	return(temp);
 }
 
@@ -68,7 +65,7 @@ node* DELROOT(node* head)
 
 unsigned COUNT_ELEMENT( node* head) 
 {
-	int COUNTER = 1;
+	int COUNTER = 0;
 
 	node* temp = head;
 
@@ -85,14 +82,17 @@ unsigned COUNT_ELEMENT( node* head)
 void TRAVERSAL_FORWARD(node* head)  
 {
 	node* element = head;
+	int counter = COUNT_ELEMENT(head);
 	if(element != NULL)
 	{
-		while (element!= NULL)
-		{
-			printf(element->data);
 
-			element = element->next;
+		for (int i = 0; i < counter; i++)
+		{
+			printf("%s \n", element->data);
+			if(element->next != nullptr)
+				element = element->next;
 		}
+
 	}
 }
 void TRAVERSAL_BACKWARD(node* tail)
@@ -117,7 +117,7 @@ node* FIND(char* elem_data, node* head)
 		while (element != NULL)
 		{
 			
-			if (element->data == elem_data)
+			if (strcmp(element->data,elem_data)==0)
 				return element;
 
 			element = element->next;
@@ -193,7 +193,7 @@ node* GETTAIL(node* head)
 {
 	node* temp = head;
 
-	while (temp->next != NULL)
+	while (temp->next != NULL )
 	{
 		temp = temp->next;
 	}
@@ -209,17 +209,24 @@ void BUBBLE_SORT(node* head) {
 	{
 		node* tmp = head;
 
-		for (size_t i = 0; i < counter; i++)
+		for (size_t i = 0; i < counter + 1; i++)
 		{
+			tmp = head;
 
 
 			for (size_t i = 0; i < counter - 1; i++)
 			{
-				if (tmp->data > tmp->next->data)
+				if(tmp->next != nullptr)
 				{
-					SWAP(FIND(tmp->data, head), FIND(tmp->next->data, head));
+					if (strcmp(tmp->data, tmp->next->data) > 0)
+					{
+						SWAP(FIND(tmp->data, head), FIND(tmp->next->data, head));
+					
+					}
+					tmp = tmp->next;
+
 				}
-				tmp = tmp->next;
+				
 			}
 		}
 	}
