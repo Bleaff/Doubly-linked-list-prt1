@@ -61,7 +61,7 @@ node* DELROOT(node* head)
 	return next_after_head;
 }
 
-unsigned COUNT_ELEMENT( node* head) 
+unsigned COUNT_ELEMENT(node* head) 
 {
 	int COUNTER = 0;
 
@@ -71,7 +71,8 @@ unsigned COUNT_ELEMENT( node* head)
 		if (temp != NULL)
 		{
 			COUNTER++;
-			temp = temp->next;
+			if (temp->next == nullptr)temp = temp->next;
+			else { break; }
 		}
 	}
 	return COUNTER;
@@ -134,31 +135,48 @@ void EXTRACTION(char* del_elem_data,node* head)
 }
 
 void REMOVING_DUPLICATE(node* head)
-{
-	node* lhv = head;
-	
-	if (lhv->next != NULL)
+{// не должно быть удаления корня 
+// должно оставлять нетронутым 1 элемент , если их больше 1 повторяющегося!
+	int counter = COUNT_ELEMENT(head);
+
+	if (counter >= 2)
 	{
-		node* rhv = lhv->next;
+		node* tmp = head;
 
-		while (lhv != NULL)
+		for (size_t i = 0; i < counter + 1; i++)
 		{
+			tmp = head;
 
-			while (rhv != NULL)
+
+			for (size_t i = 0; i < counter - 1; i++)
 			{
-
-				if (lhv->data == rhv->data)//условие схожести элементов
+				if (tmp->next != nullptr)
 				{
-					DEL(rhv);
+					if (strcmp(tmp->data, tmp->next->data) == 0)
+					{
+						
+						node* both_to_die = tmp;
+						if (both_to_die->prev == nullptr)
+						{
+							head = DELROOT(both_to_die);
+
+							tmp = head;
+						}
+						else{
+							tmp = tmp->next;
+							DEL(both_to_die);
+						}
+
+
+					}
+					else{ tmp = tmp->next; }
+					
+
 				}
-				rhv = rhv->next;
 
 			}
-
-			lhv = lhv->next;
 		}
 	}
-
 }
 
 //swap with pointers and data
@@ -300,6 +318,8 @@ void WRITING_TO_FILE(node* container_head, char* file_name) {
 		while (tmp != NULL)
 		{
 			fputs(tmp->data, F1);
+
+			fputs("\n", F1);
 
 			tmp = tmp->next;
 		}

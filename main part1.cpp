@@ -6,11 +6,41 @@
 #include<cstring>
 #include<string.h> // Для strlen
 
+
+char* SCANSTRING(int* len) {
+    *len = 0; // изначально строка пуста
+    int capacity = 1; // ёмкость контейнера динамической строки (1, так как точно будет '\0')
+    char* s = (char*)malloc(sizeof(char)); // динамическая пустая строка
+
+    char c = getchar(); // символ для чтения данных
+
+    // читаем символы, пока не получим символ переноса строки (\n)
+    while (c != '\n') {
+        s[(*len)++] = c; // заносим в строку новый символ
+
+        // если реальный размер больше размера контейнера, то увеличим его размер
+        if (*len >= capacity) {
+            capacity *= 2; // увеличиваем ёмкость строки в два раза
+            s = (char*)realloc(s, capacity * sizeof(char)); // создаём новую строку с увеличенной ёмкостью  
+        }
+
+        c = getchar(); // считываем следующий символ          
+    }
+
+    s[*len] = '\0'; // завершаем строку символом конца строки
+
+    return s; // возвращаем указатель на считанную строку
+}
+
+
+
 int main()
 {
     node* head = nullptr;
 
-    char buffer[128];
+    char *buffer;
+
+    int leng = 0;
 
     char* token = NULL;
 
@@ -20,9 +50,11 @@ int main()
 
     printf("HELP: \n 1.Type: '1 data'  where 'data' some string \n 2.Type:  '2 data' to add new element with parameter data \n 3.Type:'3' to sort doubly linked list  \n 4.Type: '4 data' to delete element where 'data' is the element with such parameter \n 5.Type '5' to delete root \n 6.Type:'6' to see how many element already exist \n 7.Type:'7' to print items forward . 8.Type '8' to print items backward \n 9.Type: '9' to delete all list \n 10.Type:'10' to remove duplicate \n 11.Type:'11 file_path' to read list from file with name = file_path' \n 12.Type:'12 file_name' to write to file with name file_name. \n 13.Type '0' to STOP. \n");
 
-        while(buffer != "stop")
+        while(1)
         {
-           gets_s( buffer);
+           buffer = SCANSTRING(&leng);
+
+           if (strcmp(buffer, "0") == 0)break;
 
             char* splited_str = strtok_s(buffer, seps, &token);
 
