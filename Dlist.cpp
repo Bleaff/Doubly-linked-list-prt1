@@ -43,7 +43,6 @@ node* DEL(node* current) {
 	if (prev != NULL)prev->next = current->next;
 	if (next != NULL)next->prev = current->prev;
 
-	delete[] current->data;
 	free(current);
 
 	return prev;
@@ -57,7 +56,6 @@ node* DELROOT(node* head)
 	next_after_head = head->next;
 	next_after_head->prev = NULL;
 
-	delete[] head->data;
 	free(head);
 
 	return next_after_head;
@@ -220,7 +218,7 @@ void BUBBLE_SORT(node* head) {
 				{
 					if (strcmp(tmp->data, tmp->next->data) > 0)
 					{
-						SWAP(FIND(tmp->data, head), FIND(tmp->next->data, head));
+						SWAP(tmp,tmp->next);
 					
 					}
 					tmp = tmp->next;
