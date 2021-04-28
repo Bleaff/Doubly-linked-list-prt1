@@ -18,7 +18,7 @@ node* DEL(node* current);
 //deleting of the root
 node* DELROOT(node* root);
 
-unsigned int COUNT_ELEMENT(node* head);
+int COUNT_ELEMENT(node* head);
 
 void TRAVERSAL_FORWARD(node* head);
 void TRAVERSAL_BACKWARD(node* tail);

@@ -42,6 +42,7 @@ node* DEL(node* current) {
 
 	if (prev != NULL)prev->next = current->next;
 	if (next != NULL)next->prev = current->prev;
+	if (current->next == NULL)prev->next = NULL;
 
 	free(current);
 
@@ -61,21 +62,19 @@ node* DELROOT(node* head)
 	return next_after_head;
 }
 
-unsigned COUNT_ELEMENT(node* head) 
+int COUNT_ELEMENT(node* head)
+
+//Возвращает количество элементов
+
 {
-	int COUNTER = 0;
 
-	node* temp = head;
+	int i = 0;
 
-	while (temp!= NULL) {
-		if (temp != NULL)
-		{
-			COUNTER++;
-			if (temp->next == nullptr)temp = temp->next;
-			else { break; }
-		}
-	}
-	return COUNTER;
+	for (; head; head = head->next)
+		i++;
+
+	return i;
+
 }
 
 void TRAVERSAL_FORWARD(node* head)  
@@ -99,13 +98,15 @@ void TRAVERSAL_BACKWARD(node* tail)
 	node* element = tail;
 	if (element != NULL)
 	{
-		while (element= NULL)
+		while (element != NULL)
 		{
-			printf(element->data);
-
-			element = element->prev;
+			printf("%s \n", element->data);
+			if (element != nullptr)
+				element = element->prev;
 		}
 	}
+
+
 }
 
 node* FIND(char* elem_data, node* head)
@@ -134,48 +135,61 @@ void EXTRACTION(char* del_elem_data,node* head)
 		printf("Deleted %s completly", del_elem_data);
 }
 
+//void REMOVING_DUPLICATE(node* head)
+//{// не должно быть удаления корня 
+//// должно оставлять нетронутым 1 элемент , если их больше 1 повторяющегося!
+//	int counter = COUNT_ELEMENT(head);
+//	int i = 0;
+//
+//	if (counter >= 2)
+//	{
+//		node* tmpi = head;
+//		node* tmpj = head;
+//
+//		while ( tmpi != nullptr)
+//		{
+//			tmpj = head->next;
+//
+//			while(i<counter && tmpj!= nullptr)
+//			{
+//				i++;
+//				//if (tmpj->next != nullptr)
+//				//{
+//					if (strcmp(tmpi->data, tmpj->data) == 0)
+//					{
+//						node* next_node = tmpj;
+//
+//						tmpj = tmpj->next;
+//
+//						DEL(next_node);
+//
+//					}
+//					else
+//					{
+//						tmpj = tmpj->next;
+//					}
+//				/*}*/
+//
+//			}
+//			tmpi = tmpi->next;
+//
+//		}
+//	}
+//
+//}
 void REMOVING_DUPLICATE(node* head)
-{// не должно быть удаления корня 
-// должно оставлять нетронутым 1 элемент , если их больше 1 повторяющегося!
-	int counter = COUNT_ELEMENT(head);
-
-	if (counter >= 2)
+{
+	node* tmpi = head;
+	node* tmpj = head;
+	for (; tmpi->next; tmpi = tmpi->next)
 	{
-		node* tmp = head;
-
-		for (size_t i = 0; i < counter + 1; i++)
+		for (; tmpj;tmpj = tmpj->next)
 		{
-			tmp = head;
-
-
-			for (size_t i = 0; i < counter - 1; i++)
-			{
-				if (tmp->next != nullptr)
-				{
-					if (strcmp(tmp->data, tmp->next->data) == 0)
-					{
-						
-						node* both_to_die = tmp;
-						if (both_to_die->prev == nullptr)
-						{
-							head = DELROOT(both_to_die);
-
-							tmp = head;
-						}
-						else{
-							tmp = tmp->next;
-							DEL(both_to_die);
-						}
-
-
-					}
-					else{ tmp = tmp->next; }
-					
-
-				}
-
+			if (FIND(tmpi->data, tmpj) != tmpi && FIND(tmpi->data, tmpj) != NULL) {
+				tmpj = DEL(FIND(tmpi->data, tmpj));
 			}
 		}
+		tmpj = head;
 	}
 }
 
@@ -258,7 +272,7 @@ node* READING_FROM_FILE(node* head, char* file_name)
 
 	scanf("%d", &Is_node_already_exist);
 
-	char seps[] = " ,";
+	char seps[] = " ";
 	
 	char* token = NULL;
 
@@ -279,15 +293,19 @@ node* READING_FROM_FILE(node* head, char* file_name)
 	{
 		printf("File was opened successfully!");
 
-		char* splited_str = strtok_s(buffer, seps, &token);
+		
 
 		while (fgets(buffer, 1024, file_r) != NULL)
 		{
+			char* splited_str = strtok_s(buffer, seps, &token);
+
 			while (splited_str != NULL)
 			{
 				if (!Is_node_already_exist)
 				{
 					head_in = initialize(splited_str);
+
+					Is_node_already_exist = 1;
 
 					last = head_in;
 				}
@@ -300,7 +318,8 @@ node* READING_FROM_FILE(node* head, char* file_name)
 		}
 		fclose(file_r);
 	}
-	return head_in;
+	if(!head)return head_in;
+	else { return head; }
 }
 
 void WRITING_TO_FILE(node* container_head, char* file_name) {
@@ -319,7 +338,7 @@ void WRITING_TO_FILE(node* container_head, char* file_name) {
 		{
 			fputs(tmp->data, F1);
 
-			fputs("\n", F1);
+			fputs(" ", F1);
 
 			tmp = tmp->next;
 		}

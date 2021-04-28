@@ -114,7 +114,7 @@ int main()
                 else if (strcmp(splited_str, "8") == 0)
                 {
                     splited_str = strtok_s(NULL, seps, &token);
-                    TRAVERSAL_BACKWARD(head);
+                    TRAVERSAL_BACKWARD(GETTAIL(head));
                 }
                 else if (strcmp(splited_str, "9") == 0)
                 {
@@ -141,7 +141,7 @@ int main()
                 {
                     if (token != NULL)
                         splited_str = strtok_s(NULL, seps, &token);
-                    READING_FROM_FILE(head, splited_str);
+                    head = READING_FROM_FILE(head, splited_str);
 
                 }
                 else if (strcmp(splited_str, "12") == 0)
@@ -158,6 +158,6 @@ int main()
             }
         }
 
-
+        
     return 0;
 }
