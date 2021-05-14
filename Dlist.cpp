@@ -7,9 +7,13 @@
  node* initialize(char *data) {
 	node* head;
 
-	head = (node*)malloc(sizeof(node));
+	/*head = (node*)malloc(sizeof(node));*/
 
-	head->data = (char*)malloc(strlen(data) * sizeof(char));
+	head = new node;
+
+	/*head->data = (char*)malloc(strlen(data) * sizeof(char));*/
+
+	head->data = new char[strlen(data)];
 
 	strcpy(head->data, data);
 	head->next = NULL;           
@@ -24,9 +28,14 @@
  node* ADD(node* lst, char *number)
 {
 	node* temp;
-	temp = (struct node*)malloc(sizeof(node));
+	/*temp = (struct node*)malloc(sizeof(node));*/
+	temp = new node;
 
-	temp->data = (char*)malloc(strlen(number) * sizeof(char));
+	//temp->data = (char*)malloc(strlen(number) * sizeof(char));
+
+	temp->data = new char[strlen(number)];
+
+
 	lst->next = temp; // предыдущий узел указывает на создаваемый
 	strcpy(temp->data, number);// сохранение поля данных добавляемого узла
 	temp->next = NULL; // созданный узел указывает на следующий узел
@@ -44,7 +53,9 @@ node* DEL(node* current) {
 	if (next != NULL)next->prev = current->prev;
 	if (current->next == NULL)prev->next = NULL;
 
-	free(current);
+	delete current;
+
+	delete[] current->data;
 
 	return prev;
 }
@@ -57,7 +68,9 @@ node* DELROOT(node* head)
 	next_after_head = head->next;
 	next_after_head->prev = NULL;
 
-	free(head);
+	delete head;
+
+	delete[] head->data;
 
 	return next_after_head;
 }
@@ -210,6 +223,61 @@ void REMOVING_DUPLICATE(node* head)
 }
 */
 
+
+node* SWAP(node* lst1, node* lst2, node* head)
+{
+	// Возвращает новый корень списка
+	node* prev1, * prev2, * next1, * next2;
+	prev1 = lst1->prev;  // узел предшествующий lst1
+	prev2 = lst2->prev;  // узел предшествующий lst2
+	next1 = lst1->next; // узел следующий за lst1
+	next2 = lst2->next; // узел следующий за lst2
+	if (lst2 == next1)  // обмениваются соседние узлы
+	{
+		lst2->next = lst1;
+		lst2->prev = prev1;
+		lst1->next = next2;
+		lst1->prev = lst2;
+		if (next2 != NULL)
+			next2->prev = lst1;
+		if (lst1 != head)
+			prev1->next = lst2;
+	}
+	else if (lst1 == next2)  // обмениваются соседние узлы
+	{
+		lst1->next = lst2;
+		lst1->prev = prev2;
+		lst2->next = next1;
+		lst2->prev = lst1;
+		if (next1 != NULL)
+			next1->prev = lst2;
+		if (lst2 != head)
+			prev2->next = lst1;
+	}
+	else  // обмениваются отстоящие узлы
+	{
+		if (lst1 != head)  // указатель prev можно установить только для элемента,
+			prev1->next = lst2; // не являющегося корневым
+		lst2->next = next1;
+		if (lst2 != head)
+			prev2->next = lst1;
+		lst1->next = next2;
+		lst2->prev = prev1;
+		if (next2 != NULL) // указатель next можно установить только для элемента,
+			next2->prev = lst1; // не являющегося последним
+		lst1->prev = prev2;
+		if (next1 != NULL)
+			next1->prev = lst2;
+	}
+	if (lst1 == head)
+		return(lst2);
+	if (lst2 == head)
+		return(lst1);
+	return(head);
+}
+
+
+
 void SWAP(node* lhv, node* rhv)
 {
 	char *tmp = lhv->data;
@@ -291,7 +359,7 @@ node* READING_FROM_FILE(node* head, char* file_name)
 
 	if (file_r != NULL)
 	{
-		printf("File was opened successfully!");
+		printf("File was opened successfully!\n");
 
 		
 
@@ -330,9 +398,9 @@ void WRITING_TO_FILE(node* container_head, char* file_name) {
 
 	node* tmp = container_head;
 
-	if (F1 != NULL)
+	if (F1 != NULL && tmp != NULL)
 	{
-		printf("File was opened successfully!");
+		printf("File was opened successfully!\n");
 
 		while (tmp != NULL)
 		{
@@ -346,6 +414,6 @@ void WRITING_TO_FILE(node* container_head, char* file_name) {
 
 	}
 	else {
-		printf("File wasn't opened correctly!");
+		printf("File wasn't opened correctly! or container wasn't created \n");
 	}
 }

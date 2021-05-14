@@ -48,7 +48,7 @@ int main()
 
     printf("Firstly complete initialization. To initialize print: '1 data' where 'data' some string  \n");
 
-    printf("HELP: \n 1.Type: '1 data'  where 'data' some string \n 2.Type:  '2 data' to add new element with parameter data \n 3.Type:'3' to sort doubly linked list  \n 4.Type: '4 data' to delete element where 'data' is the element with such parameter \n 5.Type '5' to delete root \n 6.Type:'6' to see how many element already exist \n 7.Type:'7' to print items forward . 8.Type '8' to print items backward \n 9.Type: '9' to delete all list \n 10.Type:'10' to remove duplicate \n 11.Type:'11 file_path' to read list from file with name = file_path' \n 12.Type:'12 file_name' to write to file with name file_name. \n 13.Type '0' to STOP. \n");
+    printf("HELP: \n 1.Type:'1 data'  where 'data' some string \n 2.Type:'2 data' to add new element with parameter data \n 3.Type:'3' to sort doubly linked list  \n 4.Type:'4 data' to delete element where 'data' is the element with such parameter \n 5.Type:'5' to delete root \n 6.Type:'6' to see how many element already exist \n 7.Type:'7' to print items forward . 8.Type:'8' to print items backward \n 9.Type:'9' to delete all list \n 10.Type:'10' to remove duplicate \n 11.Type:'11 file_path' to read list from file with name = file_path' \n 12.Type:'12 file_name' to write to file with name file_name. \n 13.Type '0' to STOP. \n");
 
         while(1)
         {

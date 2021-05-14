@@ -29,6 +29,8 @@ void EXTRACTION(char* del_elem_data);
 
 void REMOVING_DUPLICATE(node* head);
 
+node* SWAP(node* lst1, node* lst2, node* head);
+
 void SWAP(node* lhv, node* rhv);
 
 node* GETTAIL(node* head);
